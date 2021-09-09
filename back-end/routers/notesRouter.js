@@ -1,20 +1,20 @@
 const express = require("express")
 const router = express.Router();
-const User = require("../models/Notes")
+const NotesModel = require("../models/NotesMongoModel")
 
 router.get("/", (req,res)=> {
     res.send("Hey man")
 })
 
-router.get("/note", (req,res)=> {
+router.get("/notes", (req,res)=> {
 
-    var title = "Hey this  dd  ddn is the t dj rgi ddmi"
+    var title = "Hey this  dd  ddn is ff fjfm the t dj rgi ddmi"
     var desc = "This is the descriptio ffnf fmmd  11n"
 
-    User.findOne({Title: title}, (err, item)=> {
+    NotesModel.findOne({Title: title}, (err, item)=> {
 
         if(!item) {
-            const newNote = new User({
+            const newNote = new NotesModel({
             Title: title,
             Description: desc
     })
@@ -25,8 +25,6 @@ router.get("/note", (req,res)=> {
             if (title === item.Title) {
                  res.send("iiitem already exists")
             }
-                
-           
         }
 
             

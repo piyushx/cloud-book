@@ -1,9 +1,11 @@
 const express = require("express");
 const connectToDB = require("./database.js")
 const app = express();
-const router = require("./routers/notes")
+const NotesRouter = require("./routers/notesRouter")
+const AuthRouter = require("./routers/authRouter")
 
-app.use("/send", router)
+app.use("/notes", NotesRouter);
+app.use("/auth", AuthRouter);
 
 connectToDB();
 
