@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router();
-const NotesModel = require("../models/NotesMongoModel")
+const NotesModel = require("../models/UserMongoModel")
 
 router.get("/", (req,res)=> {
     res.send("Login page")
