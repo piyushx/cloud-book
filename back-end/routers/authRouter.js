@@ -4,6 +4,7 @@ const UserModel = require("../models/UserMongoModel")
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
+const getUser = require("../middleware/getUserDetails")
 
 
 router.post("/signup", [
@@ -86,8 +87,18 @@ router.post("/login", [
 
 })
 
-router.post("/getuser", (req,res)=> {
-    
+router.post("/getuser", getUser, async(req,res)=> {
+
+    try {
+        userID = req.user.id;
+
+        const userData = await UserModel.findById(userID).select("-Password")
+        res.send(userData)
+
+    } catch (error) {
+        return res.status(500).send("Some error occured").json({ error });
+    }
+
 })
 
 module.exports = router
