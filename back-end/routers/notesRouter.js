@@ -46,4 +46,8 @@ router.put("/update/:id", getUser, async(req,res)=> {
     res.json({updateNote})
 })
 
+router.delete("/delete/:id", getUser, async(req,res)=> {
+
+})
+
 module.exports = router
