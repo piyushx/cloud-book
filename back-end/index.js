@@ -4,8 +4,11 @@ const app = express();
 const NotesRouter = require("./routers/notesRouter")
 const AuthRouter = require("./routers/authRouter")
 
+app.use(express.json())
+
 app.use("/notes", NotesRouter);
 app.use("/auth", AuthRouter);
+
 
 connectToDB();
 
