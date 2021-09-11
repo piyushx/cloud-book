@@ -1,16 +1,31 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import NoteContext from '../contextAPI/NotesContext/NoteContext'
 
 function NoteItem(props) {
 
-    const {title, description, tag} = props
+    const deleteNote = useContext(NoteContext)
+
+    const {deleteNoteOne} = deleteNote
+
+    const {Title, Description, Tag} = props
     return (
         <div>
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{title}</h5>
-                            <p class="card-text">{description}</p>
+            <div className="row">
+                <div className="col-sm-11 my-4">
+                    <div className="card p-2">
+                        <div className="card-body">
+                        <div class="d-flex justify-content-between">
+                        <h5 className="card-title mb-4">{Title}</h5>
+                        <div>
+                        <i class="fas fa-pen-square mx-4"></i>
+                             <i class="fas fa-trash" onClick={()=> deleteNoteOne(Tag)}></i>
+                        </div>
+
+                        </div>
+                       
+                           
+                          
+                            <p className="card-text">{Description}</p>
                             
                         </div>
                     </div>

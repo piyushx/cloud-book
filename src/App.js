@@ -9,11 +9,13 @@ import {
 } from "react-router-dom";
 import Profile from "./components/Profile";
 import AllNotes from "./components/AllNotes";
+import NoteState from "./contextAPI/NotesContext/NoteState";
 
 
 const App = () => {
   return (
     <>
+    <NoteState>
 
       <Router>
       <Navbar/>
@@ -32,6 +34,7 @@ const App = () => {
         </Switch>
 
       </Router>
+      </NoteState>
     </>
   )
 
