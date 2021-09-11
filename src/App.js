@@ -1,13 +1,14 @@
-import React from "react";
+import React, { Profiler } from "react";
 import Navbar from "./components/Navbar"
-import Notes from "./components/Notes"
+import Notes from "./components/CreateNote"
 
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
-import About from "./components/About";
+import Profile from "./components/Profile";
+import AllNotes from "./components/AllNotes";
 
 
 const App = () => {
@@ -18,11 +19,14 @@ const App = () => {
       <Navbar/>
 
         <Switch>
-          <Route exact path="/">
-            <Notes/>
+          <Route exact path="/profile">
+            <Profile/>
           </Route>
-          <Route exact path="/about">
-            <About/>
+          <Route exact path="/">
+            <AllNotes/>
+          </Route>
+          <Route exact path="/create">
+            <Notes/>
           </Route>
 
         </Switch>

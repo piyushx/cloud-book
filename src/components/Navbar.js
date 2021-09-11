@@ -16,11 +16,17 @@ const Navbar = () => {
                                 <Link className="nav-link" aria-current="page" to="/">Home</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/about">Link</Link>
+                                <Link className="nav-link" to="/create">Create New Note</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/profile">Profile</Link>
                             </li>
                 
                         </ul>
                     </div>
+
+                    <button type="submit" class="btn btn-secondary mx-2">Login</button>
+                    <button type="submit" class="btn btn-secondary mx-2">Signup</button>
                 </div>
             </nav>
         </div>
