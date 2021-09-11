@@ -6,7 +6,7 @@ function Notes() {
     return (
         <div className = "container my-3">
             <NewNoteForm/>
-            <NoteItem/>
+            <NoteItem title = "My note 1" description = "This is the description" tag = "Personal"/>
         </div>
     )
 }
