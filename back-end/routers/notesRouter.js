@@ -4,7 +4,7 @@ const NotesModel = require("../models/NotesMongoModel")
 const getUser = require("../middleware/getUserDetails")
 
 router.get("/all", getUser,  async(req,res)=> {
-    const Notes = await NotesModel.find({User: req.user.id})
+    const Notes = await NotesModel.find({User: req.User.id})
     res.json({Notes})
 })
 
@@ -14,7 +14,7 @@ router.post("/new", getUser, async(req,res)=> {
         Title,
         Description,
         Tag,
-        User: req.user.id
+        User: req.User.id
     })
     const saveNote = await newNote.save()
     res.json(saveNote)

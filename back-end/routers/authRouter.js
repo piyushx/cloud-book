@@ -90,7 +90,7 @@ router.post("/login", [
 router.post("/getuser", getUser, async(req,res)=> {
 
     try {
-        userID = req.user.id;
+        userID = req.User.id;
 
         const userData = await UserModel.findById(userID).select("-Password")
         res.send(userData)
