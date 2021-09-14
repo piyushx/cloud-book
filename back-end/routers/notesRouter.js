@@ -46,6 +46,16 @@ router.put("/update/:id", getUser, async(req,res)=> {
     res.json({updateNote})
 })
 
+router.delete("/delete/:id", getUser, async(req,res)=> {
+    NotesModel.findByIdAndDelete(req.params.id, (err)=> {
+        if(err) {
+            console.log(err);
+        } else {
+            res.send("Deleted data")
+        }
+    })
+})
+
 
 
 module.exports = router
