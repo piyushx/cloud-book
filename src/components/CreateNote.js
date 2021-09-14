@@ -14,7 +14,7 @@ function Notes() {
             <h3 className="my-4">Your recent notes: </h3>
             <div className="row">
             {fetchNote.Note.map((eachNote)=> 
-                <div className = "col-md-4"><NoteItem Title = {eachNote.Title} Description = {eachNote.Description} Tag = {eachNote.Tag} Key = {eachNote.Tag} /></div>
+                <div className = "col-md-4"><NoteItem Title = {eachNote.Title} Description = {eachNote.Description} Tag = {eachNote.Tag} Key = {eachNote._id} /></div>
             )}
             </div>
         </div>

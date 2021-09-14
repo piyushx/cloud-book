@@ -7,7 +7,7 @@ function NoteItem(props) {
 
     const {deleteNoteOne} = deleteNote
 
-    const {Title, Description, Tag} = props
+    const {Title, Description, Key} = props
     return (
         <div>
             <div className="row">
@@ -18,7 +18,7 @@ function NoteItem(props) {
                         <h5 className="card-title mb-4">{Title}</h5>
                         <div>
                         <i class="fas fa-pen-square mx-4"></i>
-                             <i class="fas fa-trash" onClick={()=> deleteNoteOne(Tag)}></i>
+                             <i class="fas fa-trash" onClick={()=> deleteNoteOne(Key)}></i>
                         </div>
 
                         </div>

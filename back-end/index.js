@@ -3,7 +3,9 @@ const connectToDB = require("./database.js")
 const app = express();
 const NotesRouter = require("./routers/notesRouter")
 const AuthRouter = require("./routers/authRouter")
+var cors = require("cors")
 
+app.use(cors())
 app.use(express.json())
 
 app.use("/notes", NotesRouter);
