@@ -10,6 +10,7 @@ import {
 import Profile from "./components/Profile";
 import AllNotes from "./components/AllNotes";
 import NoteState from "./contextAPI/NotesContext/NoteState";
+import Homepage from "./components/Homepage"
 
 
 const App = () => {
@@ -24,8 +25,11 @@ const App = () => {
           <Route exact path="/profile">
             <Profile/>
           </Route>
-          <Route exact path="/">
+          <Route exact path="/allNotes">
             <AllNotes/>
+          </Route>
+          <Route exact path="/">
+          <Homepage/>
           </Route>
           <Route exact path="/create">
             <Notes/>

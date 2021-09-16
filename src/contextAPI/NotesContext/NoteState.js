@@ -22,7 +22,6 @@ const NoteState = (props) => {
         setNote(json.Notes)
     }
 
-
     const addNote = async(Title, Description, Tag) => {
 
         const response = await fetch(`${host}/new`, {
@@ -79,12 +78,7 @@ const NoteState = (props) => {
             break;
             
         }
-
         setNote(newNote)
-
-       
-
-       
     }
 
     return (

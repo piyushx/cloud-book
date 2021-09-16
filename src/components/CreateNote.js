@@ -24,17 +24,13 @@ function Notes() {
         setNotes({eid, eTitle, eDescription, eTag})
     }
     
-    
-
     const onClickChange = (event) => {
         updateOne(Notes.eid, Notes.eTitle, Notes.eDescription, Notes.eTag)
         event.preventDefault(); 
         refer.current.click()
-        console.log(Notes.eid, Notes.eTitle);
     }
 
     const onChange = (e) => {
-
         setNotes({ ...Notes, [e.target.name]: e.target.value })
     }
 
