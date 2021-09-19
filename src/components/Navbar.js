@@ -1,11 +1,17 @@
-import { useRef , useState} from 'react';
-import { Link } from 'react-router-dom'
+import { useRef , useState, useContext} from 'react';
+import { Link } from 'react-router-dom';
+import NoteContext from '../contextAPI/NotesContext/NoteContext';
 
 
 const Navbar = () => {
 
     const signupref = useRef(null)
     const loginref = useRef(null)
+    const logoutref = useRef(null)
+    const logoutrefer = useRef(null)
+
+    const authentication = useContext(NoteContext);
+    const {loginAPI, logout, signupAPI} = authentication
 
     const signupModalOpen = (event) => {
         event.preventDefault(); 
@@ -18,14 +24,26 @@ const Navbar = () => {
     }
 
     const [login, setlogin] = useState({email: "", password: ""})
+    const [signup, setsignup] = useState({name: "",email: "", password: ""})
 
     const onChange = (event) => {
         setlogin({...login, [event.target.name] : event.target.value})
-        
+    }
+
+    const onChangesignup = (event) => {
+        setsignup({...signup, [event.target.name] : event.target.value})
     }
 
     const onLoginButton = () => {
         console.log(login);
+        loginAPI(login.email, login.password)
+        logoutref.current.click()
+    }
+
+    const onSignupButton = () => {
+        console.log(signup);
+        signupAPI(signup.name, signup.email, signup.password)
+        logoutrefer.current.click()
     }
 
     return (
@@ -56,7 +74,7 @@ const Navbar = () => {
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" ref={logoutref} data-bs-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-primary" onClick={onLoginButton}>Login to cloud-book</button>
                         </div>
                     </div>
@@ -65,11 +83,11 @@ const Navbar = () => {
             </div>
 
             <div className="SignupModal">
-            <button type="button" ref={signupref} class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#loginModal">
+            <button type="button" ref={signupref} class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#signupModal">
                 Launch demo modal
             </button>
 
-            <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -80,22 +98,22 @@ const Navbar = () => {
                             <div className="container">
                             <div class="mb-3">
                                     <label for="name" class="form-label">Enter your Full name: </label>
-                                    <input type="text" onChange={onChange} class="form-control" id="name" name="name" aria-describedby="emailHelp" />
+                                    <input type="text" onChange={onChangesignup} class="form-control" id="name" name="name" aria-describedby="emailHelp" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Enter Email Address: </label>
-                                    <input type="email" onChange={onChange} class="form-control" id="email" name="email" aria-describedby="emailHelp" />
+                                    <input type="email" onChange={onChangesignup} class="form-control" id="email" name="email" aria-describedby="emailHelp" />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="Description" class="form-label">Enter Password: </label>
-                                    <input type="password" onChange={onChange} class="form-control" name="eDescription" id="eDescription" />
+                                    <label for="password" class="form-label">Enter Password: </label>
+                                    <input onChange={onChangesignup} type="password" class="form-control" name="password" id="password" />
                                 </div>
 
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" >Sign-up now</button>
+                            <button type="button" class="btn btn-secondary" ref={logoutrefer} data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onClick={onSignupButton}>Sign-up now</button>
                         </div>
                     </div>
                 </div>
@@ -124,6 +142,7 @@ const Navbar = () => {
 
                     <button type="submit" class="btn btn-secondary mx-2" onClick={loginModalOpen}>Login</button>
                     <button type="submit" class="btn btn-secondary mx-2" onClick={signupModalOpen}>Signup</button>
+                    <button type="submit" class="btn btn-secondary mx-2" onClick={logout}>Logout</button>
                 </div>
             </nav>
         </div>

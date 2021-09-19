@@ -38,8 +38,9 @@ router.post("/signup", [
                 id: user.id
             }
         }
-        const JWTdata = jwt.sign(data, JWT_SECRET)
-        res.send(JWTdata)
+ 
+        const authToken = jwt.sign(data, JWT_SECRET);
+        res.json({ authToken });
     }
 })
 
@@ -78,7 +79,7 @@ router.post("/login", [
 
         const JWT_SECRET = "Piyush likes food"
 
-        const authToken = await jwt.sign(data, JWT_SECRET);
+        const authToken =  jwt.sign(data, JWT_SECRET);
         res.json({ authToken });
 
     } catch (error) {
