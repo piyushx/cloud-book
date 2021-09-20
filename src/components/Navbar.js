@@ -1,27 +1,33 @@
 import { useRef , useState, useContext} from 'react';
-import { Link } from 'react-router-dom';
-import NoteContext from '../contextAPI/NotesContext/NoteContext';
+import { Link, useHistory } from 'react-router-dom';
+
 
 
 const Navbar = () => {
+    const history = useHistory()
 
     const signupref = useRef(null)
     const loginref = useRef(null)
     const logoutref = useRef(null)
     const logoutrefer = useRef(null)
 
-    const authentication = useContext(NoteContext);
-    const {loginAPI, logout, signupAPI} = authentication
+   
 
-    const signupModalOpen = (event) => {
+    const signupModalOpen = async(event) => {
         event.preventDefault(); 
         signupref.current.click()
     };
 
-    const loginModalOpen = (event) => {
+    const loginModalOpen = async(event) => {
         event.preventDefault(); 
         loginref.current.click()
     }
+
+    const logout = async() => {
+        localStorage.removeItem("authtoken")
+        history.push("/")
+        console.log("Logged out!");
+        }
 
     const [login, setlogin] = useState({email: "", password: ""})
     const [signup, setsignup] = useState({name: "",email: "", password: ""})
@@ -36,15 +42,57 @@ const Navbar = () => {
 
     const onLoginButton = () => {
         console.log(login);
-        loginAPI(login.email, login.password)
         logoutref.current.click()
+        loginAPI(login.email, login.password)
     }
 
     const onSignupButton = () => {
         console.log(signup);
-        signupAPI(signup.name, signup.email, signup.password)
         logoutrefer.current.click()
+        signupAPI(signup.name, signup.email, signup.password)
     }
+
+    
+    const loginAPI = async(email, password) => {
+      
+        const response = await fetch(`http://localhost:5000/auth/login`, {
+                method: 'POST',  
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({Email: email, Password: password})
+            });
+    
+            const json = await response.json()
+            console.log(json.sucess, json.authToken);
+    
+            if(json.sucess) {
+                localStorage.setItem("authtoken", json.authToken)
+                history.push("/allNotes")
+            } else {
+                history.push("/")
+            }
+           
+        }
+    
+        const signupAPI = async(name, email, password) => {
+            const response = await fetch(`http://localhost:5000/auth/signup`, {
+                method: 'POST',  
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({Name: name, Email: email, Password: password})
+            });
+    
+            const jsn = await response.json()
+            console.log(jsn.sucess, jsn.authToken);
+            if(jsn.sucess) {
+                localStorage.setItem("authtoken", jsn.authToken)
+                history.push("/allNotes")
+            } else {
+                history.push("/")
+            }}
+    
 
     return (
         <div>
@@ -126,6 +174,7 @@ const Navbar = () => {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        {localStorage.getItem("authtoken") ?
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
                                 <Link className="nav-link" aria-current="page" to="/allNotes">View All</Link>
@@ -137,12 +186,13 @@ const Navbar = () => {
                                 <Link className="nav-link" to="/profile">Profile</Link>
                             </li>
 
-                        </ul>
+                        </ul>: ""}
                     </div>
 
+                    {!localStorage.getItem("authtoken")? <div className="btnwrap">
                     <button type="submit" class="btn btn-secondary mx-2" onClick={loginModalOpen}>Login</button>
-                    <button type="submit" class="btn btn-secondary mx-2" onClick={signupModalOpen}>Signup</button>
-                    <button type="submit" class="btn btn-secondary mx-2" onClick={logout}>Logout</button>
+                    <button type="submit" class="btn btn-secondary mx-2" onClick={signupModalOpen}>Signup</button></div> :
+                    <button type="submit" class="btn btn-secondary mx-2" onClick={logout}>Logout</button>}
                 </div>
             </nav>
         </div>

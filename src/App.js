@@ -19,19 +19,22 @@ const App = () => {
     <NoteState>
 
       <Router>
-      <Navbar/>
 
         <Switch>
           <Route exact path="/profile">
+          <Navbar/>
             <Profile/>
           </Route>
           <Route exact path="/allNotes">
+          <Navbar/>
             <AllNotes/>
           </Route>
           <Route exact path="/">
+          <Navbar/>
           <Homepage/>
           </Route>
           <Route exact path="/create">
+          <Navbar/>
             <Notes/>
           </Route>
 

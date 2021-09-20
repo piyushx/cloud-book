@@ -7,6 +7,8 @@ const jwt = require("jsonwebtoken")
 const getUser = require("../middleware/getUserDetails")
 
 
+let sucess = false
+
 router.post("/signup", [
     body("Email", "Enter a valid Email").isEmail(),
     body("Name", "Enter a correct Name").isLength({ min: 5 }),
@@ -19,7 +21,6 @@ router.post("/signup", [
     }
 
     ifUserExist = await UserModel.findOne({ Email: req.body.Email })
-
     if (ifUserExist) {
         return res.json({ error: "user already exists" })
     } else {
@@ -40,7 +41,8 @@ router.post("/signup", [
         }
  
         const authToken = jwt.sign(data, JWT_SECRET);
-        res.json({ authToken });
+        sucess = true
+        res.json({ sucess, authToken });
     }
 })
 
@@ -80,7 +82,8 @@ router.post("/login", [
         const JWT_SECRET = "Piyush likes food"
 
         const authToken =  jwt.sign(data, JWT_SECRET);
-        res.json({ authToken });
+        sucess = true
+        res.json({sucess, authToken });
 
     } catch (error) {
         return res.status(500).send("Some error occured").json({ error });

@@ -9,6 +9,7 @@ function Home() {
     const fetchNote = useContext(NoteContext);
     const {Note, getAll, updateOne} = fetchNote
 
+    
     useEffect(() => {
         getAll()
     }, [])
