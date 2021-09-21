@@ -3,6 +3,7 @@ import NoteContext from '../contextAPI/NotesContext/NoteContext'
 
 function NoteItem(props) {
 
+    
     const deleteNote = useContext(NoteContext)
 
     const {deleteNoteOne} = deleteNote

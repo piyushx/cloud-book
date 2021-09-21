@@ -55,6 +55,7 @@ const NoteState = (props) => {
         setNote(newNotes);
     }
 
+    
     const updateOne = async(id, Title, Description, Tag)=> {
         const response = await fetch(`${host}/update/${id}`, {
             method: 'PUT',  

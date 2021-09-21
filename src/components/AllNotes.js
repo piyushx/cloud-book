@@ -38,7 +38,7 @@ function Home() {
 
     return (
 <>
-        <button type="button"  ref={refe} class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#updateModal">
+        <button type="button" ref={refe} class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#updateModal">
         Launch demo modal
     </button>
 

@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken")
 const JWT_SECRET = "Piyush likes food"
-
+ 
 const getUser = async(req,res, next) => {
 
     const token = req.header("auth-token")
